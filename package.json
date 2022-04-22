@@ -1,0 +1,28 @@
+{
+  "name": "russin_keri_nodejs_mongodb_assignment",
+  "version": "1.0.0",
+  "description": "NodeJS RESTful API Project Assignment",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "nodemon server"
+  },
+  "keywords": [
+    "NodeJS",
+    "RESTful",
+    "API",
+    "MongoDB"
+  ],
+  "author": "Keri Russin",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.3.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "jest": "^27.5.1",
+    "nodemon": "^2.0.15"
+  }
+}
