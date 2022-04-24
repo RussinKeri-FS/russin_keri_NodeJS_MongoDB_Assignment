@@ -29,7 +29,7 @@ app.use((req, res, next) => {
 
 // GET request for checking if the server is running
 app.get("/", (req, res, next) => {
-    req.statusCode(201).json ({
+    req.status(201).json ({
         message: "Server is up!",
         method: req.method
     });
