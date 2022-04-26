@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+
 const moviesRoutes = require("../api/routes/movie");
 const directorRoutes = require("../api/routes/director");
 
@@ -29,7 +30,7 @@ app.use((req, res, next) => {
 
 // GET request for checking if the server is running
 app.get("/", (req, res, next) => {
-    req.status(201).json ({
+    res.status(201).json ({
         message: "Server is up!",
         method: req.method
     });
