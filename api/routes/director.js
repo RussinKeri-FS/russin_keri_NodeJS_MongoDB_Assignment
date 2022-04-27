@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const Director = require("../models/director");
 const Messages = require("../../messages/messages");
-const { director } = require("../../messages/messages");
+
 
 
 // GET routes
@@ -85,7 +85,7 @@ router.post("/", (req, res, next) => {
             director: req.body.director,
             movie: req.body.movie,
             genre: req.body.genre,
-            year: req.body.year
+            year: req.body.year,
         });
         
         // write new director info to the database
@@ -99,6 +99,7 @@ router.post("/", (req, res, next) => {
                     director: result.director,
                     movie: result.movie,
                     genre: result.genre,
+                    year: result.year,
                     id: result._id,
                 },
                 metatdata: {
@@ -173,7 +174,7 @@ router.post("/", (req, res, next) => {
             director: req.body.director,
             movie: req.body.movie,
             genre: req.body.genre,
-            year: req.body.year
+            year: req.body.year,
         };
         Director.findByIdAndDelete({ _id: directorId}, { $set: deleteDirector })
             .exec()

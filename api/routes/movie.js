@@ -3,13 +3,13 @@ const mongoose = require("mongoose");
 const router = express.Router();
 const Movie = require("../models/movie");
 const Messages = require("../../messages/messages");
-const { update } = require("../models/movie");
+
 
 
 // GET routes
 router.get("/", (req, res, next) => {
     Movie.find({})
-        .select("title director _id")
+        .select("movie director _id")
         .exec()
         .then((movieList) => {
 
@@ -38,7 +38,7 @@ router.get("/:movieId", (req, res, next) => {
     const movieId = req.params.movieId;
 
     Movie.findById({ _id: movieId })
-        .select("title director _id")
+        .select("movie director _id")
         .exec()
         .then((movie) => {
             console.log(movie);
@@ -83,6 +83,8 @@ router.post("/", (req, res, next) => {
                 _id: mongoose.Types.ObjectId(),
                 movie: req.body.movie,
                 director: req.body.director,
+                year: req.body.year,
+                genre: req.body.genre,
             });
 
             // write new movie info to the database
