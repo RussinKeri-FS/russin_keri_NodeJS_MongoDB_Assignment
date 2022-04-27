@@ -14,7 +14,7 @@ router.get("/", (req, res, next) => {
         .then((movieList) => {
 
             // validation to check if collection is empty
-            if(movieList <1) {
+            if(movieList < 1) {
                 res.status(200).json({
                     message: Messages.movie_collection_empty,
                 });
@@ -38,7 +38,7 @@ router.get("/:movieId", (req, res, next) => {
     const movieId = req.params.movieId;
 
     Movie.findById({ _id: movieId })
-        .select("movie director _id")
+        .select("movie _id")
         .exec()
         .then((movie) => {
             console.log(movie);
@@ -66,7 +66,12 @@ router.get("/:movieId", (req, res, next) => {
 
 // POST route
 router.post("/", (req, res, next) => {
-    Movie.find({ movie: req.body.movie, director: req.body.director, genre: req.body.genre, year: req.body.year })
+    Movie.find({ 
+        movie: req.body.movie, 
+        director: req.body.director, 
+        genre: req.body.genre, 
+        year: req.body.year 
+    })
         .exec()
         .then((result) => {
             console.log(result);
@@ -130,7 +135,12 @@ router.patch("/:movieId", (req, res, next) => {
         year: req.body.year,
     };
 
-    Movie.findByIdAndUpdate({ _id: movieId}, { $set: updateMovie })
+    Movie.findByIdAndUpdate({ 
+        _id: movieId
+    }, 
+    { 
+        $set: updateMovie 
+    })
         .exec()
         .then((result) => {
 
@@ -175,7 +185,11 @@ router.delete("/:movieId", (req, res, next) => {
         year: req.body.year,
     };
 
-    Movie.findByIdAndDelete({ _id: movieId }, { $set: deleteMovie })
+    Movie.findByIdAndDelete({ 
+        _id: movieId 
+    }, 
+    { 
+        $set: deleteMovie })
         .exec()
         .then((result) => {
 

@@ -9,7 +9,7 @@ const Messages = require("../../messages/messages");
 // GET routes
 router.get("/", (req, res, next) => {
     Director.find({})
-        .select("director _id")
+        .select("director movie_id")
         .exec()
         .then((directorList) => {
             
@@ -40,7 +40,7 @@ router.get("/:directorId", (req, res, next) => {
     
     Director.findById(directorId)
     .select("director _id")
-    .populate("movie", "title")
+    .populate("movie")
     .exec()
     .then((director) => {
         
@@ -68,7 +68,12 @@ router.get("/:directorId", (req, res, next) => {
 
 // POST route
 router.post("/", (req, res, next) => {
-    Director.find({ director: req.body.director, movie: req.body.movie, genre: req.body.genre, year: req.body.year })
+    Director.find({ 
+        director: req.body.director, 
+        movie: req.body.movie, 
+        genre: req.body.genre, 
+        year: req.body.year 
+    })
     .exec()
     .then((result) => {
         
@@ -102,7 +107,7 @@ router.post("/", (req, res, next) => {
                     year: result.year,
                     id: result._id,
                 },
-                metatdata: {
+                metadata: {
                     method: req.method,
                     host: req.hostname,
                 },
@@ -128,7 +133,12 @@ router.post("/", (req, res, next) => {
 
         };
 
-        Director.findByIdAndUpdate({ _id: directorId }, { $set: updateDirector })
+        Director.findByIdAndUpdate({ 
+            _id: directorId 
+        }, 
+        { 
+            $set: updateDirector 
+        })
             .exec()
             .then((result) => {
 

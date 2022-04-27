@@ -1,8 +1,17 @@
 const mongoose = require("mongoose");
 
+
 const directorSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    director: { type: String, require: true }
+    director: { 
+        type: String, 
+        required: true 
+    },
+    movie: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Movie",
+        required: true,
+    },
 });
 
 
