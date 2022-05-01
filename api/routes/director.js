@@ -102,6 +102,14 @@ router.post('/', (req, res, next) => {
           });
         })
         .catch((err) => {
+          console.error(err.message);
+          res.status(500).json({
+            error: {
+              message: err.message,
+            },
+          });
+        })
+        .catch((err) => {
           console.log(err);
           res.status(500).json({
             error: {
@@ -116,7 +124,7 @@ router.post('/', (req, res, next) => {
     const directorId = req.params.directorId;
 
     const updateDirector = {
-      director: req.body.director,
+      name: req.body.name,
     };
 
     Director.findByIdAndUpdate(
